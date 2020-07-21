@@ -105,12 +105,10 @@ After that you can launch `ffcm.exe` the results are sent to `stdout`.
 
 // TODO
 
-
-## Detections
+## Detections and alerting
 
 * Looking for `-start-remote-debugger` command line arguments to Firefox
 * Modification of `user.js` and `prefs.js` files, especially modifications to the 3 settings related to enabling remote debugging
-
 
 ## Build
 
@@ -150,5 +148,5 @@ Windows Defender seems to be doing **some extra security scans for cross compile
 
 ## Final remarks
 
-**As always the reminder that pen testing requires authorization from proper stakeholders. Be nice, don't do crimes.**
+**As always the reminder that pen testing requires authorization from proper stakeholders.**
 
