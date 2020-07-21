@@ -148,5 +148,5 @@ Windows Defender seems to be doing **some extra security scans for cross compile
 
 ## Final remarks
 
-**As always the reminder that pen testing requires authorization from proper stakeholders.**
+**As always the reminder that pen testing requires authorization from proper stakeholders.** This information is provided to improve the understanding of attacks and build better mitigations and improve detections.
 
