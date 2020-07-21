@@ -16,7 +16,8 @@ There is likely a much better/easier way to implemented this, as Firefox recentl
 The Mozilla documentation for the `Remote Debug Protocol` is located here: https://docs.firefox-dev.tools/backend/protocol.html
 
 This tool is written in Golang using concurrent sender/receiver routines, because I thought it's cool to play around with that.
-The code is a bit confusing due to having to send 5 different "kind of" messages to the server to setup and get all that is needed, and the client uses a single data structure (called `wireMessage`) to represent all possible JSON requests/responses - so it can get a bit messy trying to understand the code. Yay. :)
+
+The code leverages a single struct for 5 different "kind of" messages to the server. The structure is named `wireMessage` and represents all possible JSON requests/responses. Due to the use of a single message type for all requests/responses it can get a bit messy trying to understand the code. Yay. :)
 
 ## Inspired by Cookie Crimes
 
@@ -30,7 +31,6 @@ There is more background info about the tool and browser remote debugging on my 
 * [Post-Exploitation: Abusing Chrome's debugging feature to observe and control browsing sessions remotely](https://embracethered.com/blog/posts/2020/chrome-spy-remote-control/)
 * [Cookie Crimes and the new Microsoft Edge Browser](https://embracethered.com/blog/posts/2020/cookie-crimes-on-mirosoft-edge/)
 
-Let's look at the setup first.
 
 ## Basic Usage
 
