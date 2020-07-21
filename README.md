@@ -4,9 +4,11 @@ Connect to Firefox debug port and issue a Javascript command to grab cookies.
 For now I have focused on Windows, but it should work also with macOS - but I don't have a MacBook at the moment to test it.
 
 
-## Technical things and protocol
+## Technical Things and Protocol
 
-This tool is doing things at the lowest possible level using a `TCP client` to connect to Firefox and send debug messages to eventually run Javascript commands using the `evaluateJSAsync` method and access `Services.cookies.cookies`. The `Services` object is only available when setting `devtools.chrome.enabled` to true in the user's settings - more about that in the pre-reqs.
+This tool is doing things at the TCP level using `net.Dial` to get a TCP client (`Conn`) to Firefox. 
+
+It then sends various config and setup debug messages as JSON serialized objects to eventually run Javascript commands using the `evaluateJSAsync` method and access `Services.cookies.cookies`. The `Services` object is only available when setting `devtools.chrome.enabled` to true in the user's settings - more about that in the pre-reqs.
 
 There is likely a much better/easier way to implemented this, as Firefox recently (since 78) added a `Network.getAllCookies` Debug API, and I was not yet able to figure out how to invoke that. 
 
@@ -55,18 +57,38 @@ write 'user_pref("devtools.chrome.enabled", true);' | out-file $firstprofile\use
 ```
 
 
-## macOS Setup
+### macOS Setup
 
 // TODO
 
+
 ## Build
 
-Get the code (main.go file) and build it:
+Very simple, get the code (`main.go` file) and build it.
 
+### Get the Code
+
+For instance download via
 ```
 go get github.com/wunderwuzzi23/firefox-cookiemonster
+```
+
+or 
+
+```
+git clone https://github.com/wunderwuzzi23/firefox-cookiemonster
+```
+
+
+### Build Command
+
+Then build with:
+
+```
 build -o ffcm main.go
 ```
+
+#### Cross Compile
 
 If you code Go on Linux or WSL (like I do) you can cross-compile with:
 
@@ -74,9 +96,12 @@ If you code Go on Linux or WSL (like I do) you can cross-compile with:
 $ env GOARCH=amd64 GOOS=windows go build -o ffcm.exe main.go
 ```
 
-### Interesting behavior with cross compiled Go binaries
+### Interesting behavior with cross compiled Go binaries!
 
-Windows Defender seems to be doing an some extra security scans for cross compiled binaries. I got a popup from Defender saying it might take up to 10 seconds for the binary to run because its being scanned... It still ran without issues though. When compiling natively on Windows there was no extra scan or popup.
+Windows Defender seems to be doing **some extra security scans for cross compiled binaries**. I got a popup from Defender saying it might take up to 10 seconds for the binary to run because its being scanned... It still ran without issues though. When compiling natively on Windows there was no extra scan or popup.
+
+
+## Final Remarks
 
 **As always the reminder that pen testing requires authorization from proper stakeholders. Be nice, don't do crimes.**
 
