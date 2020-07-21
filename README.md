@@ -54,15 +54,13 @@ The result is cookies in the form of `name:value:domain`
 
 You can update the Javascript command being sent to the server by changing the `defaultCommand` constant in the source code.
 
-## Pre-requisites
+## Enabling remote debugging
 
-To enable remote debugging the following Firefox settings play a role::
+To enable remote debugging the following Firefox settings have to be updated:
 
 * *devtools.debugger.remote-enabled*
 * *devtools.debugger.prompt-connection*
 * *devtools.chrome.enabled*
-
-These need to be updated to enable the debugging experience.
 
 ### Windows setup
 
@@ -70,7 +68,7 @@ Below are a few lines of PowerShell which create a `user.js` which typically see
 
 Firefox needs a restart for them to be picked up.
 
-First you can retrieve the Firefox profile via:
+First, retrieve the users's profile via:
 
 ```
 $firstprofile = (gci $env:APPDATA\Mozilla\Firefox\Profiles\*.default-rel* -Directory | Select-Object -First 1).FullName
