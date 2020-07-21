@@ -147,6 +147,10 @@ $ env GOARCH=amd64 GOOS=windows go build -o ffcm.exe main.go
 
 Windows Defender seems to be doing **some extra security scans for cross compiled binaries**. I got a popup from Defender saying it might take up to 10 seconds for the binary to run because its being scanned... It still ran without issues though. When compiling natively on Windows there was no extra scan or popup.
 
+## Blog
+
+If you like this stuff, check out the [Embrace the Red](https://embracethered.com) blog.
+
 
 ## Final remarks
 
