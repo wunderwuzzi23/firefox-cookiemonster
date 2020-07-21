@@ -5,7 +5,7 @@ Connect to Firefox debug port and issue Javascript commands, useful for grabbing
 For now I have focused on Windows, but it should work with macOS (even more useful there actually) - but I don't have a MacBook at the moment to test it.
 
 
-## Technical Things and Protocol
+## Technical things and debug protocol
 
 This tool is doing things at the TCP level using `net.Dial` to get a TCP client (`Conn`) to Firefox. 
 
@@ -23,7 +23,7 @@ The code leverages a single struct for 5 different "kind of" messages to the ser
 
 What inspired me to research and build this? Go check out [Cookie Crimes](https://github.com/defaultnamehere/cookie_crimes) for Chrome by @mangopdf.
 
-## Background and more Info about Browser Remote Debugging
+## Background and more info about browser remote debugging
 
 There is more background info about the tool and browser remote debugging on my blog at: 
 
@@ -32,7 +32,7 @@ There is more background info about the tool and browser remote debugging on my 
 * [Cookie Crimes and the new Microsoft Edge Browser](https://embracethered.com/blog/posts/2020/cookie-crimes-on-mirosoft-edge/)
 
 
-## Basic Usage
+## Basic usage
 
 ```
 .\ffcm.exe 
@@ -45,7 +45,7 @@ The result is cookies in the form of `name:value:domain`
 You can update the Javascript command being sent to the server by changing the `defaultCommand` constant in the source code.
 
 
-### Command Line Options
+### Command line options
 
 * **-server**: the name of the debug server, by default localhost
 * **-port**: the port of the debug server, by default set to 9222
@@ -61,7 +61,7 @@ By default the (remote) debug port of Firefox is not enabled. So the first step 
 
 These need to be updated to enable the debugging experience.
 
-### Windows Setup
+### Windows setup
 
 Below are a few lines of PowerShell which create a `user.js` which typically seems to get merged into the `pref.js` file. If it does not work via the `user.js` file, you can try to update the `pref.js` file directly - but for me the `user.js` file has worked well.
 
@@ -84,7 +84,7 @@ write 'user_pref("devtools.debugger.prompt-connection", false);' | out-file $fir
 That's it, next time Firefox starts the settings will be applied.
 
 
-### Connecting
+### Connecting and launching ffcm
 
 Here are two commands that might come in handy when trying this, first is to terminate all instances of Firefox:
 ```
@@ -97,7 +97,7 @@ And launching Firefox with the `-start-debugger-server` option:
 Start-Process 'C:\Program Files\Mozilla Firefox\firefox.exe' -ArgumentList "-start-debugger-server 9222 -headless"
 ```
 
-After that you can launch ffcm.exe.
+After that you can launch `ffcm.exe` the results are sent to `stdout`.
 
 
 ### macOS Setup
@@ -109,7 +109,7 @@ After that you can launch ffcm.exe.
 
 Very simple, get the code (`main.go` file) and build it.
 
-### Get the Code
+### Get the code
 
 For instance download via
 ```
@@ -124,7 +124,7 @@ git clone https://github.com/wunderwuzzi23/firefox-cookiemonster
 
 Now you have the code, and are ready to build it.
 
-### Build Command
+### Build command
 
 Build with:
 
@@ -132,7 +132,7 @@ Build with:
 build -o ffcm.exe main.go
 ```
 
-#### Cross Compile
+#### Cross compile
 
 If you code Go on Linux or WSL (like I do) you can cross-compile with:
 
@@ -145,7 +145,7 @@ $ env GOARCH=amd64 GOOS=windows go build -o ffcm.exe main.go
 Windows Defender seems to be doing **some extra security scans for cross compiled binaries**. I got a popup from Defender saying it might take up to 10 seconds for the binary to run because its being scanned... It still ran without issues though. When compiling natively on Windows there was no extra scan or popup.
 
 
-## Final Remarks
+## Final remarks
 
 **As always the reminder that pen testing requires authorization from proper stakeholders. Be nice, don't do crimes.**
 
