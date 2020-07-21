@@ -1,4 +1,4 @@
-# Firefox - Debug client for cookie access
+# Firefox - Debug Client for Cookie Access
 
 Connect to Firefox debug port and issue Javascript commands, useful for grabbing cookies.
 
