@@ -1,6 +1,6 @@
 # Firefox - Debug Client for Cookie Access
 
-Connect to Firefox debug port and issue Javascript commands, useful for grabbing cookies.
+Connect to Firefox debug port and issue Javascript commands and read responses - useful for grabbing cookies.
 
 For now I have focused on Windows, but it should work with macOS (even more useful there actually) - but I don't have a MacBook at the moment to test it.
 
