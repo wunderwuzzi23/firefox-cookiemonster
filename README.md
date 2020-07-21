@@ -56,9 +56,9 @@ You can update the Javascript command being sent to the server by changing the `
 
 By default the (remote) debug port of Firefox is not enabled. So the first step is to enable it, in particular depending on the scenario there are multiple Firefox configuration options to be aware of:
 
-* devtools.debugger.remote-enabled
-* devtools.debugger.prompt-connection
-* devtools.chrome.enabled
+* *devtools.debugger.remote-enabled*
+* *devtools.debugger.prompt-connection*
+* *devtools.chrome.enabled*
 
 These need to be updated to enable the debugging experience.
 
@@ -112,7 +112,6 @@ Very simple, get the code (`main.go` file) and build it.
 
 ### Get the code
 
-For instance download via
 ```
 go get github.com/wunderwuzzi23/firefox-cookiemonster
 ```
@@ -123,11 +122,8 @@ or
 git clone https://github.com/wunderwuzzi23/firefox-cookiemonster
 ```
 
-Now you have the code, and are ready to build it.
 
 ### Build command
-
-Build with:
 
 ```
 build -o ffcm.exe main.go
@@ -135,7 +131,7 @@ build -o ffcm.exe main.go
 
 #### Cross compile
 
-If you code Go on Linux or WSL (like I do) you can cross-compile with:
+If you code Go on Linux or WSL you can cross-compile with:
 
 ```
 $ env GOARCH=amd64 GOOS=windows go build -o ffcm.exe main.go
