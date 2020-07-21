@@ -2,8 +2,9 @@
 
 Connect to Firefox debug port and issue Javascript commands and read responses - useful for grabbing cookies.
 
-It works both on `Windows` and `macOS`.
+It works for `Windows` and `macOS`, should also work on `Linux`.
 
+Example output:
 ![ffcm output](https://embracethered.com/blog/images/2020/firefox/output.png)
 
 ## Technical details
@@ -84,7 +85,7 @@ write 'user_pref("devtools.debugger.prompt-connection", false);' | out-file $fir
 
 That's it, next time Firefox starts the settings will be applied.
 
-### Connecting and launching ffcm
+#### Connecting and launching ffcm
 
 Here are two commands that might come in handy when trying this, first is to terminate all instances of Firefox:
 ```
@@ -99,7 +100,7 @@ Start-Process 'C:\Program Files\Mozilla Firefox\firefox.exe' -ArgumentList "-sta
 
 After that you can launch `ffcm.exe` the results are sent to `stdout`.
 
-### End to end demo scenario on Windows
+#### End to end demo scenario on Windows
 
 ```
 $firstprofile = (gci $env:APPDATA\Mozilla\Firefox\Profiles\*.default-rel* -Directory | Select-Object -First 1).FullName
@@ -122,6 +123,8 @@ Get-Process -Name firefox | Stop-Proces
 
 Things are very similar to Windows, besides diferent folder names and this example is using `bash`.
 
+First, the updates to the `user.js` file:
+
 ```
 firstprofile=$(echo $HOME/Library/Application\ Support/Firefox/Profiles/*.default-rel*)
 
@@ -134,13 +137,17 @@ echo 'user_pref("devtools.debugger.prompt-connection", false);' >> "$firstprofil
 
 To enable the new settings, a fresh instance of Firefox needs to start up. Can be done with either `pkill firefox` or regular `kill` command `ps aux | grep -ie firefox | awk '{print $2}' | xargs kill -9`
 
-### Launching Firefox
+*figuring out a way via -new-instance or copying profiles might also work, but I have not tried these variations*
+
+#### Launching Firefox with debugger API exposed
 
 ```
 /Applications/Firefox.app/Contents/MacOS/firefox --start-debugger-server 9222 &
 ```
 
-Now you can run `./ffcm` and emjoy the results. Consider cleaning up and reverting changes at the end also.
+Now you can run `./ffcm` and emjoy the results. 
+
+Consider cleaning up and reverting changes at the end also.
 
 
 ## Detections and alerting
