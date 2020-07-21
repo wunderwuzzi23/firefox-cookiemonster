@@ -8,21 +8,23 @@ For now I have focused on Windows, but it should work with macOS (even more usef
 
 ## Technical details
 
-The tool is written in `Golang` using concurrent sender/receiver routines. It creates TCP connection to Firefox using `net.Dial`.
+The tool is written in `Golang` using concurrent sender/receiver routines. It creates a TCP connection to Firefox using `net.Dial` and then sends various method calls as JSON serialized objects to eventually run Javascript commands using the `evaluateJSAsync` API to access `Services.cookies.cookies`. 
 
-It then sends various config and setup debug messages as JSON serialized objects to eventually run Javascript commands using the `evaluateJSAsync` method and access `Services.cookies.cookies`. 
-
-There is likely a much better/easier way to implemented this, as Firefox recently (since 78) added a `Network.getAllCookies` Debug API, and I was not yet able to figure out how to invoke that. 
+There is likely a much better/easier way to implemented this, as Firefox recently (since version 78) added a `Network.getAllCookies` Debug API as well.
 
 The Mozilla documentation for the `Remote Debug Protocol` is located [here](https://docs.firefox-dev.tools/backend/protocol.html).
 
-The code leverages a single struct for 5 different "kind of" messages to the server. The structure is named `wireMessage` and represents all possible JSON requests/responses. Due to the use of a single message type for all requests/responses it can get a bit messy trying to understand the code. Yay. :)
+The code leverages a single struct for 5 different "kind of" messages to the server. 
+
+The structure is named `wireMessage` and represents all possible JSON requests/responses. Due to the use of a single message type for all requests/responses it can get a bit messy trying to understand the code.
 
 ## Inspired by Cookie Crimes
 
 What inspired me to research this for Firefox? Go check out [Cookie Crimes](https://github.com/defaultnamehere/cookie_crimes) for Chrome by @mangopdf.
 
 ## Basic usage
+
+Assuming you have a Firefox instance to connect to and its listening at `localhost:9222`, just run:
 
 ```
 .\ffcm.exe 
