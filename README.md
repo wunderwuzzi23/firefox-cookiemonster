@@ -25,6 +25,8 @@ If you don't expose the endpoint remotely, you only need to worry about the `dev
 
 ### Windows Setup
 
+TODO: This needs a bit more research for the minimum amount of steps needed.
+
 ```
 
 $firstprofile = (gci $env:APPDATA\Mozilla\Firefox\Profiles\*.default-release -Directory | Select-Object -First 1).FullName
