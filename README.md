@@ -2,7 +2,7 @@
 
 Connect to Firefox debug port and issue Javascript commands and read responses - useful for grabbing cookies.
 
-For now I have focused on Windows, but it should work with macOS (even more useful there actually) - but I don't have a MacBook at the moment to test things.
+It works both on `Windows` and `macOS`.
 
 ![ffcm output](https://embracethered.com/blog/images/2020/firefox/output.png)
 
@@ -50,17 +50,23 @@ You can pass in `-command` command line argument to run other Javascript code.
 
 ## Enabling remote debugging
 
+Enabling remote debugging is not (yet) built into the tool at this point. 
+
 To enable remote debugging the following Firefox settings have to be updated:
 
 * *devtools.debugger.remote-enabled*
 * *devtools.debugger.prompt-connection*
 * *devtools.chrome.enabled*
 
-### Windows setup
-
-Below are a few lines of PowerShell which create a `user.js` which typically seems to get merged into the `pref.js` file. If it does not work via the `user.js` file, you can try to update the `pref.js` file directly - but for me the `user.js` file has worked well.
+One can update the `user.js` file in profile folder which seems to get merged into the `prefs.js` file. If it does not work via the `user.js` file, you can try to update the `pref.js` file directly - but for me the `user.js` file has worked well. 
 
 Firefox needs a restart for them to be picked up.
+
+Some more experiementing with `prefs.js` might be interesting - maybe there is a way that does not require Firefox to restart.
+
+Following are examples for Windows and macOS.
+
+### Windows setup
 
 First, retrieve the users's profile via:
 
@@ -93,7 +99,7 @@ Start-Process 'C:\Program Files\Mozilla Firefox\firefox.exe' -ArgumentList "-sta
 
 After that you can launch `ffcm.exe` the results are sent to `stdout`.
 
-### End to end demo scenario
+### End to end demo scenario on Windows
 
 ```
 $firstprofile = (gci $env:APPDATA\Mozilla\Firefox\Profiles\*.default-rel* -Directory | Select-Object -First 1).FullName
@@ -112,11 +118,30 @@ Get-Process -Name firefox | Stop-Proces
 
 ```
 
-
-
 ### macOS setup and example
 
-// TODO
+Things are very similar to Windows, besides diferent folder names and this example is using `bash`.
+
+```
+firstprofile=$(echo $HOME/Library/Application\ Support/Firefox/Profiles/*.default-rel*)
+
+echo 'user_pref("devtools.chrome.enabled", true);'              >> "$firstprofile/user.js"
+echo 'user_pref("devtools.debugger.remote-enabled", true);'     >> "$firstprofile/user.js"
+echo 'user_pref("devtools.debugger.prompt-connection", false);' >> "$firstprofile/user.js"
+```
+
+#### Killing existing instances
+
+To enable the new settings, a fresh instance of Firefox needs to start up. Can be done with either `pkill firefox` or regular `kill` command `ps aux | grep -ie firefox | awk '{print $2}' | xargs kill -9`
+
+### Launching Firefox
+
+```
+/Applications/Firefox.app/Contents/MacOS/firefox --start-debugger-server 9222 &
+```
+
+Now you can run `./ffcm` and emjoy the results. Consider cleaning up and reverting changes at the end also.
+
 
 ## Detections and alerting
 
@@ -140,11 +165,10 @@ or
 git clone https://github.com/wunderwuzzi23/firefox-cookiemonster
 ```
 
-
 ### Build command
 
 ```
-build -o ffcm.exe main.go
+build -o ffcm main.go
 ```
 
 #### Cross compile
