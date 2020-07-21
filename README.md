@@ -20,6 +20,10 @@ This tool is written in Golang using concurrent sender/receiver routines, becaus
 The code leverages a single struct for 5 different "kind of" messages to the server. The structure is named `wireMessage` and represents all possible JSON requests/responses. Due to the use of a single message type for all requests/responses it can get a bit messy trying to understand the code. Yay. :)
 
 
+## Inspired by Cookie Crimes
+
+What inspired me to research and build this? Go check out [Cookie Crimes](https://github.com/defaultnamehere/cookie_crimes) for Chrome by @mangopdf.
+
 ## Background and more info about browser remote debugging
 
 There is more background info about the tool and browser remote debugging on my blog at: 
@@ -28,10 +32,6 @@ There is more background info about the tool and browser remote debugging on my 
 * [Post-Exploitation: Abusing Chrome's debugging feature to observe and control browsing sessions remotely](https://embracethered.com/blog/posts/2020/chrome-spy-remote-control/)
 * [Cookie Crimes and the new Microsoft Edge Browser](https://embracethered.com/blog/posts/2020/cookie-crimes-on-mirosoft-edge/)
 
-
-## Inspired by Cookie Crimes
-
-What inspired me to research and build this? Go check out [Cookie Crimes](https://github.com/defaultnamehere/cookie_crimes) for Chrome by @mangopdf.
 
 ## Basic usage
 
