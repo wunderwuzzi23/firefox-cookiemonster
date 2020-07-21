@@ -41,20 +41,22 @@ What inspired me to research and build this? Go check out [Cookie Crimes](https:
 
 The result is cookies in the form of `name:value:domain`
 
-### Want to run some other code in the debugger?
-
-You can update the Javascript command being sent to the server by changing the `defaultCommand` constant in the source code.
-
-
 ### Command line options
 
 * **-server**: the name of the debug server, by default localhost
 * **-port**: the port of the debug server, by default set to 9222
 * **-log**: flag that will enable logging to stdout for debug purposes, by default not specified
 
+
+**Note:** By default the debug port of Firefox is not enabled. See the section below on how to setup and enable Firefox remote debug protocol.
+
+### Want to run some other code in the debugger?
+
+You can update the Javascript command being sent to the server by changing the `defaultCommand` constant in the source code.
+
 ## Pre-requisites
 
-By default the (remote) debug port of Firefox is not enabled. So the first step is to enable it, in particular depending on the scenario there are multiple Firefox configuration options to be aware of:
+To enable remote debugging the following Firefox settings play a role::
 
 * *devtools.debugger.remote-enabled*
 * *devtools.debugger.prompt-connection*
