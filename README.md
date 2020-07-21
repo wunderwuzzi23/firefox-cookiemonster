@@ -38,44 +38,42 @@ There is more background info about the tool and browser remote debugging on my 
 .\ffcm.exe 
 ```
 
-The result is cookies in the form of `name:value:domain`.
+The result is cookies in the form of `name:value:domain`
 
-### Want to run some other code int he debug console?
+### Want to run some other code in the debugger?
 
-You an update the Javascript command being sent to the server by changing the `defaultCommand` constant in the source code.
+You can update the Javascript command being sent to the server by changing the `defaultCommand` constant in the source code.
 
 
 ### Command Line Options
 
 * **-server**: the name of the debug server, by default localhost
 * **-port**: the port of the debug server, by default set to 9222
-* **-log**: flag that will enable more logging for debug purposes, by default not specified
-
+* **-log**: flag that will enable logging to stdout for debug purposes, by default not specified
 
 ## Pre-requisites
 
-By default the (remote) debug port of firefox is not enabled. So the first step is to enable it, in particular depending on the scenario there are multiple Firefox configuration options to be aware of.
+By default the (remote) debug port of Firefox is not enabled. So the first step is to enable it, in particular depending on the scenario there are multiple Firefox configuration options to be aware of:
 
 * devtools.debugger.remote-enabled
 * devtools.debugger.prompt-connection
 * devtools.chrome.enabled
 
-If you don't expose the endpoint remotely, you only need to worry about the `devtools.chrome.enabled` setting.
-
+These need to be updated to enable the debugging experience.
 
 ### Windows Setup
 
-By default with Firefox (unless Chrome) remote debugging is disabled. So a couple of settings have to be updated, and Firefox needs a restart for them to be picked up.
-
 Below are a few lines of PowerShell which create a `user.js` which typically seems to get merged into the `pref.js` file. If it does not work via the `user.js` file, you can try to update the `pref.js` file directly - but for me the `user.js` file has worked well.
 
+Firefox needs a restart for them to be picked up.
 
 First you can retrieve the Firefox profile via:
+
 ```
 $firstprofile = (gci $env:APPDATA\Mozilla\Firefox\Profiles\*.default-rel* -Directory | Select-Object -First 1).FullName
 ```
 
-And add the following lines to the uesr.js file (by default this file does not exist):
+And add the following lines to the `user.js` file (by default this file does not exist):
 
 ```
 write 'user_pref("devtools.chrome.enabled", true);' | out-file $firstprofile\user.js -Append -Encoding ascii
