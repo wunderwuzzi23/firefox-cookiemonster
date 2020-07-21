@@ -1,4 +1,4 @@
-# Firefox - Cookie Monster (ffcm)
+# Firefox - Debug Client for Cookies
 
 Connect to Firefox debug port and issue Javascript commands, useful for grabbing cookies.
 
