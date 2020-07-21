@@ -9,7 +9,7 @@ For now I have focused on Windows, but it should work with macOS (even more usef
 
 This tool is doing things at the TCP level using `net.Dial` to get a TCP client (`Conn`) to Firefox. 
 
-It then sends various config and setup debug messages as JSON serialized objects to eventually run Javascript commands using the `evaluateJSAsync` method and access `Services.cookies.cookies`. The `Services` object is only available when setting `devtools.chrome.enabled` to true in the user's settings - more about that in the pre-reqs.
+It then sends various config and setup debug messages as JSON serialized objects to eventually run Javascript commands using the `evaluateJSAsync` method and access `Services.cookies.cookies`. 
 
 There is likely a much better/easier way to implemented this, as Firefox recently (since 78) added a `Network.getAllCookies` Debug API, and I was not yet able to figure out how to invoke that. 
 
