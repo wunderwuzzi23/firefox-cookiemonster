@@ -22,7 +22,7 @@ The code leverages a single struct for 5 different "kind of" messages to the ser
 
 ## Inspired by Cookie Crimes
 
-What inspired me to research and build this? Go check out [Cookie Crimes](https://github.com/defaultnamehere/cookie_crimes) for Chrome by @mangopdf.
+What inspired me to research this for Firefox? Go check out [Cookie Crimes](https://github.com/defaultnamehere/cookie_crimes) for Chrome by @mangopdf.
 
 ## Background and more info about browser remote debugging
 
