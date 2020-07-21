@@ -100,7 +100,7 @@ var log MiniLogger
 
 func main() {
 
-	fmt.Print("Firefox Debug Monster")
+	fmt.Print("Firefox Debug Client")
 	fmt.Println(" - @wunderwuzzi23 (July 2020)")
 
 	var server string
@@ -121,6 +121,7 @@ func main() {
 	conn, err := net.Dial("tcp", connString)
 	if err != nil {
 		fmt.Println("*** Error connecting: ", err)
+		return
 	}
 	log.Println(" Connected")
 
