@@ -41,6 +41,8 @@ There is more background info about the tool and browser remote debugging on my 
 
 The result is cookies in the form of `name:value:domain`
 
+![ffcm output](https://embracethered.com/blog/images/2020/firefox/output.png)
+
 ### Command line options
 
 * **-server**: the name of the debug server, by default localhost
