@@ -140,7 +140,7 @@ echo 'user_pref("devtools.debugger.prompt-connection", false);' >> "$firstprofil
 
 To enable the new settings, a fresh instance of Firefox needs to start up. Can be done with either `pkill firefox` or regular `kill` command:`ps aux | grep -ie firefox | awk '{print $2}' | xargs kill -9`
 
-*figuring out a way via -new-instance or copying profiles might also work, but I have not tried these variations*
+*Figuring out a way via -new-instance or copying profiles might also work, but I have not tried these variations*
 
 #### Launching Firefox with debugger API exposed
 
@@ -148,7 +148,7 @@ To enable the new settings, a fresh instance of Firefox needs to start up. Can b
 /Applications/Firefox.app/Contents/MacOS/firefox --start-debugger-server 9222 &
 ```
 
-Now you can run `./ffcm` and emjoy the results. 
+Now you can run `./ffcm` and enjoy the results. 
 
 Consider cleaning up and reverting changes at the end also.
 
