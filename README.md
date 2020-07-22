@@ -4,6 +4,8 @@ Connect to Firefox debug port and issue Javascript commands and read responses -
 
 It works for `Windows` and `macOS`, should also work on `Linux`.
 
+**This technique is probably most useful when we don't have root or the user's credentials to decrypt cookies or can't attach a debugger to the browser**
+
 Example output:
 ![ffcm output](https://embracethered.com/blog/images/2020/firefox/output.png)
 
@@ -59,7 +61,7 @@ To enable remote debugging the following Firefox settings have to be updated:
 * *devtools.debugger.prompt-connection*
 * *devtools.chrome.enabled*
 
-One can update the `user.js` file in profile folder which seems to get merged into the `prefs.js` file. If it does not work via the `user.js` file, you can try to update the `pref.js` file directly - but for me the `user.js` file has worked well. 
+One can update the `user.js` file in profile folder which seems to get merged into the `prefs.js` file. If it does not work via the `user.js` file, you can try to update the `prefs.js` file directly - but for me the `user.js` file has worked well. 
 
 Firefox needs a restart for them to be picked up.
 
@@ -121,7 +123,7 @@ Get-Process -Name firefox | Stop-Proces
 
 ### macOS setup and example
 
-Things are very similar to Windows, besides diferent folder names and this example is using `bash`.
+Things are basically the same, besides different folder names usage of a different shell.
 
 First, the updates to the `user.js` file:
 
@@ -135,7 +137,7 @@ echo 'user_pref("devtools.debugger.prompt-connection", false);' >> "$firstprofil
 
 #### Killing existing instances
 
-To enable the new settings, a fresh instance of Firefox needs to start up. Can be done with either `pkill firefox` or regular `kill` command `ps aux | grep -ie firefox | awk '{print $2}' | xargs kill -9`
+To enable the new settings, a fresh instance of Firefox needs to start up. Can be done with either `pkill firefox` or regular `kill` command:`ps aux | grep -ie firefox | awk '{print $2}' | xargs kill -9`
 
 *figuring out a way via -new-instance or copying profiles might also work, but I have not tried these variations*
 
